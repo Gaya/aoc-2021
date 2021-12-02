@@ -1,7 +1,8 @@
 const { readFileSplitLines } = require('../00-helpers/helpers');
 
-const findTimesDecreased = require('./findTimesDecreased');
+const findTimesIncreased = require('./findTimesIncreased');
 
-const solution = findTimesDecreased(readFileSplitLines('./input').map((i) => parseInt(i, 10)));
+const numbers = readFileSplitLines('./input').map((i) => parseInt(i, 10));
 
-console.log(solution);
+console.log('Part 1: ', findTimesIncreased(numbers));
+console.log('Part 2: ', findTimesIncreased(numbers, 3));
