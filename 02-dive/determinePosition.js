@@ -1,4 +1,4 @@
-function parseInput(input) {
+function parseInput(input, aim = false) {
   const matches = input.match(/^(forward|down|up) (\d+)$/);
 
   if (!matches) {
@@ -14,29 +14,47 @@ function parseInput(input) {
       };
     case 'up':
       return {
-        y: amount * -1,
+        [aim ? 'a' : 'y']: amount * -1,
       };
     case 'down':
       return {
-        y: amount,
+        [aim ? 'a' : 'y']: amount,
       };
     default:
       return {};
   }
 }
 
-function determinePosition(inputs) {
-  return inputs.reduce((acc, input) => {
-    const change = parseInput(input);
+function determinePosition(inputs, aim = false) {
+  const { x, y } = inputs.reduce((acc, input) => {
+    const change = parseInput(input, aim);
+
+    if (!aim) {
+      return {
+        ...acc,
+        x: acc.x + (change.x || 0),
+        y: acc.y + (change.y || 0),
+      };
+    }
+
+    const a = acc.a + (change.a || 0);
 
     return {
       x: acc.x + (change.x || 0),
-      y: acc.y + (change.y || 0),
+      y: acc.y + (change.x > 0 ? a * change.x : 0),
+      a,
     };
-  }, { x: 0, y: 0});
+  }, { x: 0, y: 0, a: 0 });
+
+  return { x, y };
+}
+
+function determinePositionWithAim(inputs) {
+  return determinePosition(inputs, true);
 }
 
 module.exports = {
   parseInput,
   determinePosition,
+  determinePositionWithAim,
 };

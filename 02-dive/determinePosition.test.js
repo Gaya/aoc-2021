@@ -1,4 +1,4 @@
-const { parseInput, determinePosition } = require('./determinePosition');
+const { parseInput, determinePosition, determinePositionWithAim } = require('./determinePosition');
 
 describe('determinePosition', () => {
   describe('parseInput', () => {
@@ -31,6 +31,19 @@ describe('determinePosition', () => {
         'down 8',
         'forward 2',
       ])).toEqual({ x: 15, y: 10 });
+    });
+  });
+
+  describe('determinePositionWithAim', () => {
+    it('should return the correct position after following the path with aim included', () => {
+      expect(determinePositionWithAim([
+        'forward 5',
+        'down 5',
+        'forward 8',
+        'up 3',
+        'down 8',
+        'forward 2',
+      ])).toEqual({ x: 15, y: 60 });
     });
   });
 });
