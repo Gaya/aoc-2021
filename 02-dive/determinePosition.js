@@ -1,4 +1,4 @@
-function parseInput(input, aim = false) {
+function parseInput(input) {
   const matches = input.match(/^(forward|down|up) (\d+)$/);
 
   if (!matches) {
@@ -14,11 +14,11 @@ function parseInput(input, aim = false) {
       };
     case 'up':
       return {
-        [aim ? 'a' : 'y']: amount * -1,
+        y: amount * -1,
       };
     case 'down':
       return {
-        [aim ? 'a' : 'y']: amount,
+        y: amount,
       };
     default:
       return {};
@@ -27,7 +27,7 @@ function parseInput(input, aim = false) {
 
 function determinePosition(inputs, aim = false) {
   const { x, y } = inputs.reduce((acc, input) => {
-    const change = parseInput(input, aim);
+    const change = parseInput(input);
 
     if (!aim) {
       return {
@@ -37,7 +37,7 @@ function determinePosition(inputs, aim = false) {
       };
     }
 
-    const a = acc.a + (change.a || 0);
+    const a = acc.a + (change.y || 0);
 
     return {
       x: acc.x + (change.x || 0),
