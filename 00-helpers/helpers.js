@@ -1,15 +1,18 @@
 const fs = require('fs');
 
-function readFileSplitLines(filename) {
-
+function readFile(filename) {
   try {
-    const data = fs.readFileSync(filename);
-    return data.toString().split(/\r?\n/);
+    return fs.readFileSync(filename);
   } catch (err) {
     console.error(err);
   }
 }
 
+function readFileSplitLines(filename) {
+  return readFile(filename).toString().split(/\r?\n/);
+}
+
 module.exports = {
+  readFile,
   readFileSplitLines,
 };
