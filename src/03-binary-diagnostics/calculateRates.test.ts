@@ -1,4 +1,4 @@
-const { gammaRate, epsilonRate, oxygenGeneratorRate, co2ScrubberRate } = require('./calculateRates');
+import { gammaRate, epsilonRate, oxygenGeneratorRate, co2ScrubberRate } from './calculateRates';
 
 describe('calculateRates', () => {
   const binaryList = [

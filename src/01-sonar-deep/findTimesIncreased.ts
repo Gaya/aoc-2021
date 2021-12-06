@@ -1,8 +1,8 @@
-function sum(numbers) {
+function sum(numbers: number[]): number {
   return numbers.reduce((a, b) => a + b, 0);
 }
 
-function findTimesIncreased(numbers, window = 1) {
+function findTimesIncreased(numbers: number[], window = 1): number {
   return numbers.reduce((count, item, index, allNumbers) => {
     if (
       // start when there are enough numbers to compare
@@ -17,4 +17,4 @@ function findTimesIncreased(numbers, window = 1) {
   }, 0);
 }
 
-module.exports = findTimesIncreased;
+export default findTimesIncreased;

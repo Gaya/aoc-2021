@@ -1,10 +1,10 @@
-function mostCommonBit(bits) {
+function mostCommonBit(bits: string[]) {
   return bits.filter((bit) => bit === '1').length >= (bits.length / 2) ? '1' : '0';
 }
 
-function calculateBasicRating(binaryList, type = 'gamma') {
+function calculateBasicRating(binaryList: string[], type = 'gamma') {
   const brokenBits = binaryList
-    .reduce((acc, binary) => {
+    .reduce((acc: string[][], binary) => {
       return binary.split('').reduce((totals, bit, index) => {
         totals[index] = totals[index] ? [...totals[index], bit] : [bit];
         return totals;
@@ -26,15 +26,15 @@ function calculateBasicRating(binaryList, type = 'gamma') {
   return parseInt(binaryOutcome, 2);
 }
 
-function gammaRate(binaryList) {
+export function gammaRate(binaryList: string[]) {
   return calculateBasicRating(binaryList, 'gamma');
 }
 
-function epsilonRate(binaryList) {
+export function epsilonRate(binaryList: string[]) {
   return calculateBasicRating(binaryList, 'epsilon');
 }
 
-function calculateConditionalRating(binaryList, type = 'oxygen', currentIndex = 0) {
+function calculateConditionalRating(binaryList: string[], type = 'oxygen', currentIndex = 0): number {
   if (binaryList.length === 1) {
     return parseInt(binaryList[0], 2);
   }
@@ -55,17 +55,10 @@ function calculateConditionalRating(binaryList, type = 'oxygen', currentIndex = 
   return calculateConditionalRating(remaining, type, currentIndex + 1);
 }
 
-function oxygenGeneratorRate(binaryList) {
+export function oxygenGeneratorRate(binaryList: string[]) {
   return calculateConditionalRating(binaryList, 'oxygen');
 }
 
-function co2ScrubberRate(binaryList) {
+export function co2ScrubberRate(binaryList: string[]) {
   return calculateConditionalRating(binaryList, 'co2');
 }
-
-module.exports = {
-  gammaRate,
-  epsilonRate,
-  oxygenGeneratorRate,
-  co2ScrubberRate,
-};

@@ -1,4 +1,4 @@
-function parseInput(input) {
+export function parseInput(input: string): Partial<{ x: number; y: number }> {
   const matches = input.match(/^(forward|down|up) (\d+)$/);
 
   if (!matches) {
@@ -25,7 +25,7 @@ function parseInput(input) {
   }
 }
 
-function determinePosition(inputs, aim = false) {
+export function determinePosition(inputs: string[], aim = false) {
   const { x, y } = inputs.reduce((acc, input) => {
     const change = parseInput(input);
 
@@ -38,10 +38,11 @@ function determinePosition(inputs, aim = false) {
     }
 
     const a = acc.a + (change.y || 0);
+    const xChange = (change.x || 0);
 
     return {
-      x: acc.x + (change.x || 0),
-      y: acc.y + (change.x > 0 ? a * change.x : 0),
+      x: acc.x + xChange,
+      y: acc.y + (xChange > 0 ? a * xChange : 0),
       a,
     };
   }, { x: 0, y: 0, a: 0 });
@@ -49,12 +50,6 @@ function determinePosition(inputs, aim = false) {
   return { x, y };
 }
 
-function determinePositionWithAim(inputs) {
+export function determinePositionWithAim(inputs: string[]) {
   return determinePosition(inputs, true);
 }
-
-module.exports = {
-  parseInput,
-  determinePosition,
-  determinePositionWithAim,
-};

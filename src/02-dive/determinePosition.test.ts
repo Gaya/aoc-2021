@@ -1,4 +1,4 @@
-const { parseInput, determinePosition, determinePositionWithAim } = require('./determinePosition');
+import { parseInput, determinePosition, determinePositionWithAim } from './determinePosition';
 
 describe('determinePosition', () => {
   describe('parseInput', () => {

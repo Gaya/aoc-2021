@@ -1,15 +1,19 @@
-function getSequence(input) {
-  return input
+export function getSequence(input: string): number[] {
+  return (input
     // find numbers on first line
-    .match(/^(\d+,?)+$/m)[0]
+    .match(/^(\d+,?)+$/m) || [''])[0]
     // split into array
     .split(',')
     // convert to numbers
     .map((i) => parseInt(i, 10));
 }
 
-function getBoards(input) {
+export function getBoards(input: string) {
   const boards = input.match(/^( ?([0-9]+ *)+\n?)+$/gm);
+
+  if (!boards) {
+    return [];
+  }
 
   return boards
     .map((board) => {
@@ -26,8 +30,3 @@ function getBoards(input) {
         });
     });
 }
-
-module.exports = {
-  getSequence,
-  getBoards,
-};

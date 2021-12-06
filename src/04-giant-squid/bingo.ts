@@ -1,4 +1,11 @@
-function winningBoard(boards, sequence, checking = []) {
+type Board = number[][];
+type Winner = [number, number, number];
+
+export function winningBoard(
+  boards: Board[],
+  sequence: number[],
+  checking: number[] = [],
+): Winner | null {
   const rowSize = boards[0].length;
   const colSize = boards[0][0].length;
 
@@ -40,7 +47,11 @@ function winningBoard(boards, sequence, checking = []) {
   return [winning, checking[checking.length - 1], sumOfUnchecked]
 }
 
-function lastWinningBoard(boards, sequence, lastWinner = null) {
+export function lastWinningBoard(
+  boards: Board[],
+  sequence: number[],
+  lastWinner: Winner | null = null,
+): Winner | null {
   if (boards.length === 0) {
     return lastWinner;
   }
@@ -60,8 +71,3 @@ function lastWinningBoard(boards, sequence, lastWinner = null) {
 
   return lastWinner;
 }
-
-module.exports = {
-  winningBoard,
-  lastWinningBoard,
-};
