@@ -11,4 +11,4 @@ jobs:
       - name: Install modules
         run: npm i
       - name: Run all
-        run: npm run-all
+        run: npm run run-all
