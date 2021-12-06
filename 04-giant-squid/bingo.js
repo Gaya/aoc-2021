@@ -40,6 +40,28 @@ function winningBoard(boards, sequence, checking = []) {
   return [winning, checking[checking.length - 1], sumOfUnchecked]
 }
 
+function lastWinningBoard(boards, sequence, lastWinner = null) {
+  if (boards.length === 0) {
+    return lastWinner;
+  }
+
+  const winner = winningBoard(boards, sequence);
+
+  if (winner) {
+    const remainingBoards = [...boards];
+    remainingBoards.splice(winner[0], 1);
+
+    return lastWinningBoard(
+      remainingBoards,
+      sequence,
+      winner,
+    );
+  }
+
+  return lastWinner;
+}
+
 module.exports = {
   winningBoard,
+  lastWinningBoard,
 };

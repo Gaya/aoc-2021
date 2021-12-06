@@ -1,4 +1,5 @@
-const { winningBoard } = require('./bingo');
+const { winningBoard, lastWinningBoard } = require('./bingo');
+
 describe('bingo', () => {
   const sequence = [7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24, 10, 16, 13, 6, 15, 25, 12, 22, 18, 20, 8, 19, 3, 26, 1];
   const boards = [
@@ -43,6 +44,12 @@ describe('bingo', () => {
 
     it('should pass example bingo', () => {
       expect(winningBoard(boards, sequence)).toEqual([2, 24, 188]);
+    });
+  });
+
+  describe('last winning board', () => {
+    it('should pass example bingo', () => {
+      expect(lastWinningBoard(boards, sequence)).toEqual([0, 13, 148]);
     });
   });
 });
