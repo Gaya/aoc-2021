@@ -1,4 +1,4 @@
-const { gammaRate, epsilonRate, oxygenGeneratorRating, co2ScrubberRating } = require('./calculateRates');
+const { gammaRate, epsilonRate, oxygenGeneratorRate, co2ScrubberRate } = require('./calculateRates');
 
 describe('calculateRates', () => {
   const binaryList = [
@@ -30,13 +30,13 @@ describe('calculateRates', () => {
 
   describe('oxygenGeneratorRating', () => {
     it('should return the correct oxygen generator rating given a list of binary strings', () => {
-      expect(oxygenGeneratorRating(binaryList)).toBe(23);
+      expect(oxygenGeneratorRate(binaryList)).toBe(23);
     });
   });
 
   describe('co2ScrubberRating', () => {
     it('should return the correct CO2 scrubber rating given a list of binary strings', () => {
-      expect(co2ScrubberRating(binaryList)).toBe(10);
+      expect(co2ScrubberRate(binaryList)).toBe(10);
     });
   });
 });
