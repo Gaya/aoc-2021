@@ -1,8 +1,8 @@
-import { readFileSplitLines } from '../00-helpers/helpers';
+import input from './input';
 
 import { gammaRate, epsilonRate, oxygenGeneratorRate, co2ScrubberRate } from './calculateRates';
 
-const binaryList = readFileSplitLines(__dirname + '/../../input/03');
+const binaryList = input.split(/\n/);
 
 const gamma = gammaRate(binaryList);
 const epsilon = epsilonRate(binaryList);

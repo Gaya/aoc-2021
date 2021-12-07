@@ -1,8 +1,8 @@
-import { readFileSplitLines } from '../00-helpers/helpers';
+import input from './input';
 
 import { determinePosition, determinePositionWithAim } from './determinePosition';
 
-const inputs = readFileSplitLines(__dirname + '/../../input/02').map((l) => l.trim()).filter((l) => l !== '');
+const inputs = input.split(/\n/).map((l) => l.trim()).filter((l) => l !== '');
 
 const solution1 = determinePosition(inputs);
 

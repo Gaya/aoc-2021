@@ -1,9 +1,7 @@
-import { readFile } from '../00-helpers/helpers';
+import input from './input';
 
 import { winningBoard, lastWinningBoard } from './bingo';
 import { getBoards, getSequence } from './parseInput';
-
-const input = readFile(__dirname + '/../../input/04') || '';
 
 const boards = getBoards(input);
 const sequence = getSequence(input);
