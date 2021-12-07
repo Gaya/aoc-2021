@@ -15,11 +15,16 @@ export function parseInput(input: string): [[number, number], [number, number]] 
   return [[coords[0], coords[1]], [coords[2], coords[3]]];
 }
 
-function horizontalAndVerticalLines(inputs: string[]): Line[] {
-  return inputs
-    .map(parseInput)
-    // x1 === x2 && y1 === y2
-    .filter((line) => line[0][0] === line[1][0] || line[0][1] === line[1][1]);
+function parseLines(inputs: string[], simpleLines = false): Line[] {
+  const lines = inputs
+    .map(parseInput);
+
+  if (simpleLines) {
+    // only horizontal or vertical lines
+    return lines.filter((line) => line[0][0] === line[1][0] || line[0][1] === line[1][1]);
+  }
+
+  return lines;
 }
 
 export function linesToCoords(lines: Line[]): string[] {
@@ -28,16 +33,23 @@ export function linesToCoords(lines: Line[]): string[] {
       const [start, end] = line;
       const p: [number, number][] = [];
 
-      const xDistance = start[0] - end[0];
-      const yDistance = start[1] - end[1];
+      const xDistance = end[0] - start[0];
+      const yDistance = end[1] - start[1];
 
-      for (let x = 0; x <= Math.abs(xDistance); x += 1) {
-        for (let y = 0; y <= Math.abs(yDistance); y += 1) {
-          const xp = xDistance >= 0 ? start[0] - x : start[0] + x;
-          const yp = yDistance >= 0 ? start[1] - y : start[1] + y;
 
-          p.push([xp, yp]);
+      for (let steps = 0; steps <= Math.max(Math.abs(xDistance), Math.abs(yDistance)); steps++) {
+        let xMoved = 0;
+        let yMoved = 0;
+
+        if (xDistance !== 0) {
+          xMoved = steps * (xDistance / Math.abs(xDistance));
         }
+
+        if (yDistance !== 0) {
+          yMoved = steps * (yDistance / Math.abs(yDistance));
+        }
+
+        p.push([start[0] + xMoved, start[1] + yMoved]);
       }
 
       return p;
@@ -46,8 +58,8 @@ export function linesToCoords(lines: Line[]): string[] {
     .map((p) => p.join(','));
 }
 
-export function overlappingPoints(inputs: string[]): number {
-  const lines = horizontalAndVerticalLines(inputs);
+export function overlappingPoints(inputs: string[], simpleLines = false): number {
+  const lines = parseLines(inputs, simpleLines);
   const coords = linesToCoords(lines);
 
   const set = new Set(coords);

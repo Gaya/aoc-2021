@@ -9,13 +9,22 @@ describe('linePoints', () => {
   });
 
   describe('linesToCoords', () => {
-    it('converts lines to coordinates', () => {
+    it('converts simple lines to coordinates', () => {
       const lines: Line[] = [
         [[1, 0], [1, 3]],
         [[2, 2], [0, 2]],
       ];
 
       expect(linesToCoords(lines)).toEqual(['1,0', '1,1', '1,2', '1,3', '2,2', '1,2', '0,2']);
+    });
+
+    it('converts diagonal lines to coordinates', () => {
+      const lines: Line[] = [
+        [[0, 0], [2, 2]],
+        [[2, 0], [0, 2]],
+      ];
+
+      expect(linesToCoords(lines)).toEqual(['0,0', '1,1', '2,2', '2,0', '1,1', '0,2']);
     });
   });
 
@@ -34,8 +43,12 @@ describe('linePoints', () => {
       '5,5 -> 8,2',
     ];
 
-    it('should calculate the correct number of overlapping points', () => {
-      expect(overlappingPoints(inputs)).toEqual(5);
+    it('should calculate the correct number of overlapping points for horizontal and vertical', () => {
+      expect(overlappingPoints(inputs, true)).toEqual(5);
+    });
+
+    it('should calculate the correct number of overlapping points for all lines', () => {
+      expect(overlappingPoints(inputs, false)).toEqual(12);
     });
   });
 });
