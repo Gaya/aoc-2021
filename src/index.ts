@@ -1,11 +1,11 @@
-console.time('total time');
+import fs from 'fs/promises'
 
-import './01-sonar-deep';
-import './02-dive';
-import './03-binary-diagnostics';
-import './04-giant-squid';
-import './05-hydrothermal-vents';
-import './06-lanternfish';
-import './07-the-treachery-of-whales';
+fs.readdir(__dirname)
+  .then((files) => files.filter((file) => file.match(/^(\d+)+.+$/)))
+  .then(async (files) => {
+    console.time('total time');
 
-console.timeEnd('total time');
+    await Promise.all(files.map((dir) => import(`${__dirname}/${dir}`)));
+
+    console.timeEnd('total time');
+  });
