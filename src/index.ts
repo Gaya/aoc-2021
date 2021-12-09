@@ -1,11 +1,16 @@
-import fs from 'fs/promises'
+import fs from 'fs/promises';
 
 fs.readdir(__dirname)
   .then((files) => files.filter((file) => file.match(/^(\d+)+.+$/)))
   .then(async (files) => {
-    console.time('total time');
+    const start = +new Date();
 
-    await Promise.all(files.map((dir) => import(`${__dirname}/${dir}`)));
+    await Promise.all(files.map(async (dir) => {
+      const module = await import(`${__dirname}/${dir}`);
+      const startDay = +new Date();
+      module.default();
+      console.log(`${dir} time: ${+new Date() - startDay}ms`);
+    }));
 
-    console.timeEnd('total time');
+    console.log(`Total time: ${+new Date() - start}ms`);
   });

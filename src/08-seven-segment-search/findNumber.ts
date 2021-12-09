@@ -42,7 +42,6 @@ export function findNumbers(patterns: string[]): { [pattern: string]: number } {
 
   const cf = one;
   const [a] = seven.split('').filter((l) => !one.split('').includes(l));
-  const bd = four.split('').filter((l) => !one.split('').includes(l)).join('');
   const eg = eight.split('').filter((l) => ![...four.split(''), a].includes(l)).join('');
 
   // we can determine number 6

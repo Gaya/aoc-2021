@@ -2,12 +2,14 @@ import input from './input';
 
 import { overlappingPoints } from './linePoints';
 
-const coordinates = input.split(/\n/);
+export default function solve() {
+  const coordinates = input.split(/\n/);
 
-const part1 = overlappingPoints(coordinates, true);
+  const part1 = overlappingPoints(coordinates, true);
 
-console.log('Day 5 - Part 1: ', part1);
+  console.log('Day 5 - Part 1: ', part1);
 
-const part2 = overlappingPoints(coordinates, false);
+  const part2 = overlappingPoints(coordinates, false);
 
-console.log('Day 5 - Part 2: ', part2);
+  console.log('Day 5 - Part 2: ', part2);
+}

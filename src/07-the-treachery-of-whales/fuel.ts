@@ -4,15 +4,9 @@ export function fuelToPosition(positions: number[], destination: number, trueUsa
   for (let i = 0; i < positions.length; i += 1) {
     const position = positions[i];
 
-    let usage = Math.abs(position - destination);
+    const distance = Math.abs(position - destination);
 
-    if (trueUsage) {
-      for (let difference = Math.abs(position - destination) - 1; difference > 0; difference -= 1) {
-        usage += difference;
-      }
-    }
-
-    totalUsage += usage;
+    totalUsage += trueUsage ? (distance * (distance + 1)) / 2 : distance;
   }
 
   return totalUsage;
@@ -22,11 +16,15 @@ export function leastFuel(positions: number[], trueUsage = false): number {
   const minPos = Math.min(...positions);
   const maxPos = Math.max(...positions);
 
-  const costs: number[] = [];
+  let lowestCost: number | undefined;
 
   for (let pos = minPos; pos <= maxPos; pos += 1) {
-    costs.push(fuelToPosition(positions, pos, trueUsage));
+    const cost = fuelToPosition(positions, pos, trueUsage);
+
+    if (typeof lowestCost === 'undefined' || cost < lowestCost) {
+      lowestCost = cost;
+    }
   }
 
-  return Math.min(...costs);
+  return lowestCost || 0;
 }

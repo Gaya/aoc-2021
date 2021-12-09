@@ -36,7 +36,6 @@ export function linesToCoords(lines: Line[]): string[] {
       const xDistance = end[0] - start[0];
       const yDistance = end[1] - start[1];
 
-
       for (let steps = 0; steps <= Math.max(Math.abs(xDistance), Math.abs(yDistance)); steps++) {
         let xMoved = 0;
         let yMoved = 0;
@@ -73,8 +72,6 @@ export function overlappingPoints(inputs: string[], simpleLines = false): number
 
     return true;
   });
-
-
 
   return new Set(duplicates).size;
 }

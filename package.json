@@ -4,8 +4,8 @@
   "description": "Advent of Code 2021",
   "scripts": {
     "test": "jest",
-    "prerun-all": "cp -r ./src ./dist && tsc",
-    "run-all": "node ./dist/index.js"
+    "preall": "cp -r ./src ./dist && tsc",
+    "all": "node ./dist/index.js"
   },
   "repository": {
     "type": "git",
