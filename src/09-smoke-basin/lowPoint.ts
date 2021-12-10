@@ -43,6 +43,11 @@ function findBasin([x, y]: Coordinate, otherPoints: LowPoint[], grid: number[][]
   const points: Coordinate[] = [];
   const ceiling = 9;
 
+  // // duplicate in basin? skip this one
+  // if (basin.findIndex((p) => p[0] === x && p[1] === y) > -1) {
+  //   return [basin, otherPoints];
+  // }
+
   // can go up?
   if (y !== 0 && grid[y -1][x] !== ceiling) {
     points.push([x, y - 1]);
@@ -72,18 +77,14 @@ function findBasin([x, y]: Coordinate, otherPoints: LowPoint[], grid: number[][]
 
   // reached the end
   if (points.length === 0) {
-    const uniqueBasin: Coordinate[] = [];
-
-    basin.forEach((point) => {
-      if (uniqueBasin.findIndex((p) => point.join(',') === p.join(',')) === -1) {
-        uniqueBasin.push(point);
-      }
-    });
-
-    return [uniqueBasin, lowPoints];
+    return [basin, lowPoints];
   }
 
-  return points.reduce(([b, op], point) => {
+  return points.reduce(([b, op], point, index, ps) => {
+    if (b.findIndex((p) => p[0] === point[0] && p[1] === point[1]) > -1) {
+      return [b, op];
+    }
+
     return findBasin(point, op, newGrid, [...b, point]);
   }, [basin, lowPoints]);
 }
