@@ -45,6 +45,7 @@ function followPath(
   otherPaths: string[][] = [],
   allowedSmallTwice = false,
   currentlyAllowed?: string,
+  skipDouble: string[] = [],
 ): string[][] {
   const possibleDestinations = rooms[room].exits
     .filter((e) => e !== 'end'
@@ -73,7 +74,7 @@ function followPath(
       return followPath(rooms, nextRoom, nextPath, without, allowedSmallTwice, nextRoom);
     }
 
-    return followPath(rooms, nextRoom, nextPath, acc, allowedSmallTwice, currentlyAllowed);
+    return followPath(rooms, nextRoom, nextPath, acc, allowedSmallTwice, currentlyAllowed, skipDouble);
   }, otherPaths);
 }
 
