@@ -97,3 +97,17 @@ export function countFlashes(input: string, rounds: number): number {
 
   return flashes;
 }
+
+function flashOrNext(grid: number[][], currentIndex = 0): number {
+  if (grid.every((row) => row.every((n) => n === 0))) {
+    return currentIndex;
+  }
+
+  return flashOrNext(nextStep(grid), currentIndex + 1);
+}
+
+export function findAllFlashing(input: string): number {
+  const grid = toGrid(input);
+
+  return flashOrNext(grid);
+}

@@ -1,4 +1,4 @@
-import { countFlashes, nextStep, toGrid } from './flashing';
+import { countFlashes, findAllFlashing, nextStep, toGrid } from './flashing';
 
 describe('flashing', () => {
   describe('nextStep', () => {
@@ -55,6 +55,23 @@ describe('flashing', () => {
 5283751526`;
 
       expect(countFlashes(step1, 100)).toEqual(1656);
+    });
+  });
+
+  describe('findAllFlashing', () => {
+    it('should figure out when all the lights are flashing', () => {
+      const step1 = `5483143223
+2745854711
+5264556173
+6141336146
+6357385478
+4167524645
+2176841721
+6882881134
+4846848554
+5283751526`;
+
+      expect(findAllFlashing(step1)).toEqual(195);
     });
   });
 });
