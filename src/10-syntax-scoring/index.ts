@@ -1,8 +1,12 @@
 import input from './input';
-import { errorScore, findCorrupted } from './checkSyntax';
+import { autocompleteSyntax, corruptionErrorScore, findCorrupted, middleScore } from './checkSyntax';
 
 export default function solve() {
   const corruptedLines = findCorrupted(input);
 
-  console.log('Day 10 - Part 1: ', errorScore(corruptedLines));
+  console.log('Day 10 - Part 1: ', corruptionErrorScore(corruptedLines));
+
+  const autocompletions = autocompleteSyntax(input);
+
+  console.log('Day 10 - Part 2: ', middleScore(autocompletions));
 }
