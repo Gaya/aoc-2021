@@ -45,7 +45,6 @@ function followPath(
   otherPaths: string[][] = [],
   allowedSmallTwice = false,
   currentlyAllowed?: string,
-  skipDouble: string[] = [],
 ): string[][] {
   const possibleDestinations = rooms[room].exits
     .filter((e) => e !== 'end'
@@ -62,7 +61,7 @@ function followPath(
     const nextPath = [...path, room];
 
     if (nextRoom === 'start') {
-      return [...acc, [...nextPath, nextRoom]];
+      return [...acc, path];
     }
 
     if (
@@ -70,11 +69,11 @@ function followPath(
       && rooms[nextRoom].isSmall
       && typeof currentlyAllowed === 'undefined'
     ) {
-      // const without = followPath(rooms, nextRoom, nextPath, acc, allowedSmallTwice);
-      return followPath(rooms, nextRoom, nextPath, acc, allowedSmallTwice, nextRoom);
+      const without = followPath(rooms, nextRoom, nextPath, acc, allowedSmallTwice);
+      return followPath(rooms, nextRoom, nextPath, without, allowedSmallTwice, nextRoom);
     }
 
-    return followPath(rooms, nextRoom, nextPath, acc, allowedSmallTwice, currentlyAllowed, skipDouble);
+    return followPath(rooms, nextRoom, nextPath, acc, allowedSmallTwice, currentlyAllowed);
   }, otherPaths);
 }
 
