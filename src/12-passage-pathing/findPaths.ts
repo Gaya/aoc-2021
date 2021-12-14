@@ -70,8 +70,8 @@ function followPath(
       && rooms[nextRoom].isSmall
       && typeof currentlyAllowed === 'undefined'
     ) {
-      const without = followPath(rooms, nextRoom, nextPath, acc, allowedSmallTwice);
-      return followPath(rooms, nextRoom, nextPath, without, allowedSmallTwice, nextRoom);
+      // const without = followPath(rooms, nextRoom, nextPath, acc, allowedSmallTwice);
+      return followPath(rooms, nextRoom, nextPath, acc, allowedSmallTwice, nextRoom);
     }
 
     return followPath(rooms, nextRoom, nextPath, acc, allowedSmallTwice, currentlyAllowed, skipDouble);
