@@ -17,12 +17,14 @@ export default function solve() {
 
   console.log('Day 14 - Part 1: ', most.count - least.count);
 
-  for (let i = 0; i < 30; i++) {
-    polymer = stepPolymer(polymer, pairs);
-  }
+  console.log('Day 14 - Part 2: @TODO');
 
-  const most2 = mostAvailablePolymer(polymer);
-  const least2 = leastAvailablePolymer(polymer);
-
-  console.log('Day 14 - Part 2: ', most2.count - least2.count);
+  // for (let i = 0; i < 30; i++) {
+  //   polymer = stepPolymer(polymer, pairs);
+  // }
+  //
+  // const most2 = mostAvailablePolymer(polymer);
+  // const least2 = leastAvailablePolymer(polymer);
+  //
+  // console.log('Day 14 - Part 2: ', most2.count - least2.count);
 }

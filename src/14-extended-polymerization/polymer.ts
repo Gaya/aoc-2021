@@ -1,6 +1,7 @@
 export function stepPolymer(template: string, insertionPairs: [string, string][]): string {
   const pairs = insertionPairs.map(([left]) => left).join('|');
   const pairRegistry: Record<string, string> = insertionPairs.reduce((acc, [left, right]) => ({ ...acc, [left]: right }), {});
+
   const test = new RegExp(`(?=(${pairs}))`, 'g');
 
   const results = [...template.matchAll(test)];
