@@ -5,12 +5,12 @@ fs.readdir(__dirname)
   .then(async (files) => {
     const start = +new Date();
 
-    await Promise.all(files.map(async (dir) => {
+    for (const dir of files) {
       const module = await import(`${__dirname}/${dir}`);
       const startDay = +new Date();
-      module.default();
+      await module.default();
       console.log(`${dir} time: ${+new Date() - startDay}ms`);
-    }));
+    }
 
     console.log(`Total time: ${+new Date() - start}ms`);
   });
